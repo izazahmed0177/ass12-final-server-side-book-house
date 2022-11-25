@@ -29,6 +29,9 @@ async function run(){
     try {
 
         const usersCollection = client.db('bookHouse').collection('users');
+        const booksCollection = client.db('bookHouse').collection('allBook');
+
+        // user Api
 
         app.post('/users', async (req, res) => {
             const user = req.body;
@@ -41,6 +44,25 @@ async function run(){
             const query = {};
             const users = await usersCollection.find(query).toArray();
             res.send(users);
+        });
+        app.get('/users/role/:email', async (req, res) => {
+
+            const email = req.params.email;
+            const query = { email }
+            const user = await usersCollection.findOne(query);
+            res.send(user);
+        })
+        // 
+        // 
+
+
+        // All Book Api
+
+        app.post('/books', async (req, res) => {
+            const book = req.body;
+            console.log(book);
+            const result = await booksCollection.insertOne(book);
+            res.send(result);
         });
         
     } finally {
