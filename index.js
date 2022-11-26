@@ -69,6 +69,22 @@ async function run(){
 
 
 
+          // temporary to update price field on appointment options
+        // app.get('/addusers', async (req, res) => {
+        //     const filter = {}
+        //     const options = { upsert: true }
+        //     const updatedDoc = {
+        //         $set: {
+        //             verified: "no"
+        //         }
+        //     }
+        //     const result = await usersCollection.updateMany(filter, updatedDoc, options);
+        //     res.send(result);
+        // })
+
+
+
+
 
         // 
         // 
