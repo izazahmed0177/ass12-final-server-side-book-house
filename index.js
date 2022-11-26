@@ -52,6 +52,24 @@ async function run(){
             const user = await usersCollection.findOne(query);
             res.send(user);
         })
+
+        //----------
+
+        app.get('/allSeller', async (req, res) => {
+            
+            let query = {role:"seller" };
+
+            let seller=usersCollection.find(query) 
+            const allSeller=await seller.toArray();           
+
+            // const booking = await booksCollection.find(query);
+            res.send(allSeller);
+        })
+
+
+
+
+
         // 
         // 
 
@@ -64,6 +82,18 @@ async function run(){
             const result = await booksCollection.insertOne(book);
             res.send(result);
         });
+
+
+        app.get('/seller/:id', async (req, res) => {
+            const id = req.params.id;
+            let query = {sellerId: id };
+
+            let sellerProduct=booksCollection.find(query) 
+            const allProduct=await sellerProduct.toArray();           
+
+            // const booking = await booksCollection.find(query);
+            res.send(allProduct);
+        })
         
     } finally {
         
