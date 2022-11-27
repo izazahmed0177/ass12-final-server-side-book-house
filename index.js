@@ -15,7 +15,7 @@ app.use(express.json());
 
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.ygvslal.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
@@ -30,6 +30,26 @@ async function run(){
 
         const usersCollection = client.db('bookHouse').collection('users');
         const booksCollection = client.db('bookHouse').collection('allBook');
+        const categoryBookCollection = client.db('bookHouse').collection('bookCategorys');
+
+
+        // -------------------
+        app.get('/category', async (req, res) => {
+            const query = {};
+            const books = await categoryBookCollection.find(query).toArray();
+            res.send(books);
+        });
+
+        app.get('/category/:id', async (req, res) => {
+            const id = req.params.id;
+            console.log(id)
+            const query = {_id:ObjectId(id)};
+            const category = await categoryBookCollection.find(query).toArray();
+            res.send(category);
+        });
+
+
+        // ------------------
 
         // user Api
 
@@ -119,6 +139,21 @@ async function run(){
             // const booking = await booksCollection.find(query);
             res.send(allProduct);
         })
+
+
+        app.get('/ActionandAdventure', async (req, res) => {
+            
+            let query = {category:"Action and Adventure" };
+
+            let buyers=booksCollection.find(query) 
+            const allBuyers=await buyers.toArray();           
+            res.send(allBuyers);
+        })
+
+
+
+
+
         
     } finally {
         
