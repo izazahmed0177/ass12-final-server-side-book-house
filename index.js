@@ -170,6 +170,20 @@ async function run(){
         })
 
 
+        app.put('/allBook/bookmodal/:id', async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: ObjectId(id) }
+            const options = { upsert: true };
+            const updatedDoc = {
+                $set: {
+                    salesStatus: 'Booked'
+                }
+            }
+            const result = await booksCollection.updateOne(filter, updatedDoc, options);
+            res.send(result);
+        });
+
+
 
 
 
