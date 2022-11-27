@@ -31,6 +31,7 @@ async function run(){
         const usersCollection = client.db('bookHouse').collection('users');
         const booksCollection = client.db('bookHouse').collection('allBook');
         const categoryBookCollection = client.db('bookHouse').collection('bookCategorys');
+        const userBookCollection = client.db('bookHouse').collection('userbooks');
 
 
         // -------------------
@@ -180,6 +181,17 @@ async function run(){
                 }
             }
             const result = await booksCollection.updateOne(filter, updatedDoc, options);
+            res.send(result);
+        });
+
+        //
+        //
+        //
+
+        app.post('/userbooks', async (req, res) => {
+            const userbook = req.body;
+            console.log(userbook);
+            const result = await userBookCollection.insertOne(userbook);
             res.send(result);
         });
 
