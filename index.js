@@ -140,6 +140,25 @@ async function run(){
             res.send(allProduct);
         })
 
+        app.get('/categorybooks/:id', async (req, res) => {
+            const id = req.params.id;
+            let query = {categoryId: id };
+
+            let categorybook=booksCollection.find(query) 
+            const allbook=await categorybook.toArray();           
+
+            // const booking = await booksCollection.find(query);
+            res.send(allbook);
+        })
+
+
+
+
+
+
+
+
+
 
         app.get('/ActionandAdventure', async (req, res) => {
             
