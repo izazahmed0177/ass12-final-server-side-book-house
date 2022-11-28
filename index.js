@@ -195,6 +195,17 @@ async function run(){
             res.send(result);
         });
 
+        app.get('/userbooks/:id', async (req, res) => {
+            const id = req.params.id;
+            let query = {
+                userId: id
+             };
+
+            let userbook=userBookCollection.find(query) 
+            const alluserbook=await userbook.toArray();           
+            res.send(alluserbook);
+        })
+
 
 
 
