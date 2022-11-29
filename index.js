@@ -190,6 +190,22 @@ async function run(){
         });
 
 
+        app.get('/book/advertised/item', async (req, res) => {
+            let query = {
+                advertised:"Yes",
+                salesStatus:"available"
+         };
+
+            let books=booksCollection.find(query) 
+            const allbook=await books.toArray();           
+            res.send(allbook);
+        });
+
+
+        
+
+
+
 
 
 
