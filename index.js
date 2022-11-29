@@ -66,6 +66,19 @@ async function run(){
             const users = await usersCollection.find(query).toArray();
             res.send(users);
         });
+
+        app.get('/user/:id', async (req, res) => {
+            const id = req.params.id;
+            console.log(id)
+            const query = {_id:ObjectId(id)};
+            const user = await usersCollection.find(query).toArray();
+            res.send(user);
+        });
+
+
+
+
+
         app.get('/users/role/:email', async (req, res) => {
 
             const email = req.params.email;
@@ -106,6 +119,21 @@ async function run(){
             const result = await usersCollection.deleteOne(filter);
             res.send(result);
         })
+
+
+
+        app.put('/user/verified/:id', async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: ObjectId(id) }
+            const options = { upsert: true };
+            const updatedDoc = {
+                $set: {
+                    verified:'Yes'
+                }
+            }
+            const result = await usersCollection.updateOne(filter, updatedDoc, options);
+            res.send(result);
+        });
 
 
 
