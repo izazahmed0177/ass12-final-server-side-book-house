@@ -99,6 +99,17 @@ async function run(){
 
 
 
+
+        app.delete('/user/:id',async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: ObjectId(id) };
+            const result = await usersCollection.deleteOne(filter);
+            res.send(result);
+        })
+
+
+
+
           // temporary to update price field on appointment options
         // app.get('/addusers', async (req, res) => {
         //     const filter = {}
@@ -199,6 +210,17 @@ async function run(){
             const id = req.params.id;
             let query = {
                 userId: id
+             };
+
+            let userbook=userBookCollection.find(query) 
+            const alluserbook=await userbook.toArray();           
+            res.send(alluserbook);
+        })
+
+        app.get('/userbooksemail/:email', async (req, res) => {
+            const email = req.params.email;
+            let query = {
+                userEmail: email
              };
 
             let userbook=userBookCollection.find(query) 
