@@ -139,17 +139,17 @@ async function run(){
 
 
           // temporary to update price field on appointment options
-        // app.get('/addusers', async (req, res) => {
-        //     const filter = {}
-        //     const options = { upsert: true }
-        //     const updatedDoc = {
-        //         $set: {
-        //             verified: "no"
-        //         }
-        //     }
-        //     const result = await usersCollection.updateMany(filter, updatedDoc, options);
-        //     res.send(result);
-        // })
+        app.get('/addbookre', async (req, res) => {
+            const filter = {}
+            const options = { upsert: true }
+            const updatedDoc = {
+                $set: {
+                    report: "no"
+                }
+            }
+            const result = await booksCollection.updateMany(filter, updatedDoc, options);
+            res.send(result);
+        })
 
 
 
